@@ -13,16 +13,17 @@ public class Nurse {
 	private String user;
 	private String pw;
 	private String name;
+	private String email;
 
 	public Nurse() {
 		super();
 	}
 
-	public Nurse(Integer id, String name, String user, String pw) {
-		this.id = id;
+	public Nurse(String name, String user, String pw, String email) {
 		this.name = name;
 		this.user = user;
 		this.pw = pw;
+		this.email = email;
 	}
 	
 	public Integer getId() {
@@ -39,5 +40,9 @@ public class Nurse {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 }
