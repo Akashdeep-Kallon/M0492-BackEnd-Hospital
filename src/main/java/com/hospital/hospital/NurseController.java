@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ import tools.jackson.databind.json.JsonMapper;
 @RestController
 @RequestMapping("/nurse")
 public class NurseController {
-
+	
+	@Autowired
+	NurseRepository nurseRepository;
 	private List<Nurse> nurses = new ArrayList<>();
 
 	// Constructor
@@ -56,8 +59,8 @@ public class NurseController {
 	}
 
 	@GetMapping("/index")
-	public ResponseEntity<List<Nurse>> getAll() {
-		return ResponseEntity.ok(nurses);
+	public ResponseEntity<Iterable<Nurse>> getAll() {
+		return ResponseEntity.ok(nurseRepository.findAll());
 	}
 
 	@GetMapping("/name/{name}")
