@@ -1,11 +1,20 @@
 package com.hospital.hospital;
-public class Nurse {
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Nurse {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String user;
 	private String pw;
 	private String name;
 
 	public Nurse() {
+		super();
 	}
 
 	public Nurse(String name, String user, String pw) {
