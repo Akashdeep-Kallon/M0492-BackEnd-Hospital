@@ -16,36 +16,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/nurse") // This means URL's start with /nurse
 public class NurseController {
 
-	private final NurseRepository nurseRepository;
+    private final NurseRepository nurseRepository;
 
-	// Constructor: Spring gives us the repository
-	public NurseController(NurseRepository nurseRepository) {
-		this.nurseRepository = nurseRepository;
-	}
+    // Constructor: Spring gives us the repository
+    public NurseController(NurseRepository nurseRepository) {
+        this.nurseRepository = nurseRepository;
+    }
 
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestBody Nurse inputNurse) {
-		// Hacer
+		//Hacer
 	}
 
 	@GetMapping("/index")
 	public ResponseEntity<Iterable<Nurse>> getAll() {
-		// Hacer
+		//Hacer
 	}
 
-	// Search for a nurse by name
+	
 	@GetMapping("/name/{name}")
 	public ResponseEntity<Nurse> findByName(@PathVariable String name) {
-		Optional<Nurse> nurse = nurseRepository.findByName(name);
-
-		// Check if a nurse was found
-		if (nurse.isPresent()) {
-			return ResponseEntity.ok(nurse.get());
-		}
-
-		// Return 404 if the nurse does not exist
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-
+		//Hacer
+		
 	}
 
 }
