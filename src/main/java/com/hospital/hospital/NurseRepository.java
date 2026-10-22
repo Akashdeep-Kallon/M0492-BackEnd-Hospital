@@ -1,8 +1,15 @@
 package com.hospital.hospital;
 
-import org.hibernate.internal.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NurseRepository extends CrudRepository <Nurse, Integer> {
-	Optional<Nurse> findByUserAndPassword(String user, String password);
+// Spring automatically implements this repository
+// CRUD refers to Create, Read, Update and Delete
+public interface NurseRepository extends JpaRepository<Nurse, Integer> {
+
+    // Find a nurse by user and password (login)
+    Optional<Nurse> findByUsernameAndPassword(String username, String password);
+
+    // Find a nurse by name
+    Optional<Nurse> findByName(String name);
 }

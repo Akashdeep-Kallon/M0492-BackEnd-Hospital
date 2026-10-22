@@ -1,11 +1,8 @@
 package com.hospital.hospital;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,63 +12,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tools.jackson.databind.json.JsonMapper;
-
-@RestController
-@RequestMapping("/nurse")
+@RestController // This means that this class is a Controller
+@RequestMapping("/nurse") // This means URL's start with /nurse
 public class NurseController {
-	
-	@Autowired
-	NurseRepository nurseRepository;
-	private List<Nurse> nurses = new ArrayList<>();
 
-	// Constructor
-	public NurseController() {
+    private final NurseRepository nurseRepository;
 
-		try (InputStream inputStream = getClass().getResourceAsStream("/nurses.json")) {
-
-			JsonMapper objectMapper = JsonMapper.builder().build();
-
-			Nurse[] nursesArray = objectMapper.readValue(inputStream, Nurse[].class);
-
-			nurses = Arrays.asList(nursesArray);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-	}
+    // Constructor: Spring gives us the repository
+    public NurseController(NurseRepository nurseRepository) {
+        this.nurseRepository = nurseRepository;
+    }
 
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestBody Nurse inputNurse) {
-
-		boolean found = false;
-		for (Nurse n : nurses) {
-
-			if (n.getUser().equals(inputNurse.getUser()) && n.getPw().equals(inputNurse.getPw())) {
-				found = true;
-				break;
-			}
-		}
-		return ResponseEntity.status(found ? HttpStatus.OK : HttpStatus.UNAUTHORIZED).body(found);
-
+		//Hacer
 	}
 
 	@GetMapping("/index")
 	public ResponseEntity<Iterable<Nurse>> getAll() {
-		return ResponseEntity.ok(nurseRepository.findAll());
+		//Hacer
 	}
 
 	@GetMapping("/name/{name}")
 	public ResponseEntity<Nurse> findByName(@PathVariable String name) {
-		for (Nurse nurse : nurses) {
-			if (nurse.getName().equalsIgnoreCase(name)) {
-				return ResponseEntity.ok(nurse);
-			}
-		}
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		//Hacer
 		
 	}
 
