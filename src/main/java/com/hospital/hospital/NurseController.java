@@ -25,7 +25,18 @@ public class NurseController {
 
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestBody Nurse inputNurse) {
-		//Hacer
+		
+        Optional<Nurse> nurse = nurseRepository.findByUsernameAndPassword(
+        		inputNurse.getUsername(),
+        		inputNurse.getPassword()
+        );
+ 
+        boolean found = nurse.isPresent();
+ 
+        
+        return ResponseEntity
+                .status(found ? HttpStatus.OK : HttpStatus.UNAUTHORIZED)
+                .body(found);
 	}
 
     // Get all nurses from the database
