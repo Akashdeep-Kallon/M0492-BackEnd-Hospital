@@ -28,10 +28,11 @@ public class NurseController {
 		//Hacer
 	}
 
-	@GetMapping("/index")
-	public ResponseEntity<Iterable<Nurse>> getAll() {
-		//Hacer
-	}
+    // Get all nurses from the database
+    @GetMapping("/index")
+    public ResponseEntity<List<Nurse>> getAll() {
+        return ResponseEntity.ok(nurseRepository.findAll());
+    }
 
 	@GetMapping("/name/{name}")
 	public ResponseEntity<Nurse> findByName(@PathVariable String name) {
