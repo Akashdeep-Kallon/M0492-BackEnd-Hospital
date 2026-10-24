@@ -25,13 +25,25 @@ public class NurseController {
 
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestBody Nurse inputNurse) {
-		// Hacer
+		
+        Optional<Nurse> nurse = nurseRepository.findByUsernameAndPassword(
+        		inputNurse.getUsername(),
+        		inputNurse.getPassword()
+        );
+ 
+        boolean found = nurse.isPresent();
+ 
+        
+        return ResponseEntity
+                .status(found ? HttpStatus.OK : HttpStatus.UNAUTHORIZED)
+                .body(found);
 	}
 
-	@GetMapping("/index")
-	public ResponseEntity<Iterable<Nurse>> getAll() {
-		// Hacer
-	}
+    // Get all nurses from the database
+    @GetMapping("/index")
+    public ResponseEntity<List<Nurse>> getAll() {
+        return ResponseEntity.ok(nurseRepository.findAll());
+    }
 
 	// Search for a nurse by name
 	@GetMapping("/name/{name}")
