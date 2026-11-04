@@ -106,4 +106,16 @@ public class NurseController {
 	}
 	
 	// DELETE: Delete a nurse by ID
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Nurse> delete(@PathVariable Integer id) {
+	    Optional<Nurse> nurse = nurseRepository.findById(id);
+
+	    if (nurse.isPresent()) {
+	        nurseRepository.deleteById(id);
+
+	        return ResponseEntity.ok(nurse.get());
+	    }
+
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
 }
