@@ -73,8 +73,16 @@ public class NurseController {
 	}
 	
 	// READ: Find a nurse by ID
+	@GetMapping("/{id}")
+	public ResponseEntity<Nurse> findById(@PathVariable Integer id) {
+	    Optional<Nurse> nurse = nurseRepository.findById(id);
 
-	
+	    if (nurse.isPresent()) {
+	        return ResponseEntity.ok(nurse.get());
+	    }
+
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
 	// UPDATE: Update a nurse by ID
 	
 	
