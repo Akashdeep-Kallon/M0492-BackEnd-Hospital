@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController // This means that this class is a Controller
 @RequestMapping("/nurse") // This means URL's start with /nurse
@@ -60,4 +62,21 @@ public class NurseController {
 
 	}
 
+//CRUD
+	
+	// CREATE: Create a new nurse
+	@PostMapping("/create")
+	public ResponseEntity<Nurse> create(@RequestBody Nurse nurse) {
+	    Nurse savedNurse = nurseRepository.save(nurse);
+
+	    return ResponseEntity.status(HttpStatus.CREATED).body(savedNurse);
+	}
+	
+	// READ: Find a nurse by ID
+
+	
+	// UPDATE: Update a nurse by ID
+	
+	
+	// DELETE: Delete a nurse by ID
 }
