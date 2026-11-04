@@ -84,7 +84,26 @@ public class NurseController {
 	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
 	// UPDATE: Update a nurse by ID
-	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<Nurse> update(@PathVariable Integer id, @RequestBody Nurse inputNurse) {
+	    Optional<Nurse> nurse = nurseRepository.findById(id);
+
+	    if (nurse.isPresent()) {
+	        Nurse existingNurse = nurse.get();
+
+	        existingNurse.setUsername(inputNurse.getUsername());
+	        existingNurse.setPassword(inputNurse.getPassword());
+	        existingNurse.setName(inputNurse.getName());
+	        existingNurse.setSurname(inputNurse.getSurname());
+	        existingNurse.setEmail(inputNurse.getEmail());
+
+	        Nurse updatedNurse = nurseRepository.save(existingNurse);
+
+	        return ResponseEntity.ok(updatedNurse);
+	    }
+
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
 	
 	// DELETE: Delete a nurse by ID
 }
